@@ -13,7 +13,7 @@ permissions:
   issues: write
 
 jobs:
-  staging-main:
+  staging-main-apply:
     uses: ./.github/workflows/shared.yml
     with:
       environment: staging
@@ -21,7 +21,7 @@ jobs:
       auto_apply: true
     secrets: inherit
 
-  staging-test-bucket:
+  staging-test-bucket-apply:
     uses: ./.github/workflows/shared.yml
     with:
       environment: staging
