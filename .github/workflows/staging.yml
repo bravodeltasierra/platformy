@@ -1,7 +1,7 @@
 name: Staging Plan
 on:
   push:
-    branches: [main]
+    branches: ['*']
   pull_request:
 
 permissions:
