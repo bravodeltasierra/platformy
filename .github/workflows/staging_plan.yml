@@ -5,6 +5,8 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  issues: write
+
 jobs:
   staging-main:
     uses: ./.github/workflows/shared.yml
