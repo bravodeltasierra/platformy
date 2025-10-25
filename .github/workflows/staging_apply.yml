@@ -1,4 +1,4 @@
-name: Staging Deploys
+name: Staging Deploy
 
 on:
   push:
@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   staging-main-apply:
+    if: github.event_name == 'push'
     uses: ./.github/workflows/shared.yml
     with:
       environment: staging
@@ -22,6 +23,7 @@ jobs:
     secrets: inherit
 
   staging-test-bucket-apply:
+    if: github.event_name == 'push'
     uses: ./.github/workflows/shared.yml
     with:
       environment: staging
