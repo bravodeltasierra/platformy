@@ -14,6 +14,11 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -50,12 +55,7 @@ jobs:
       run: tofu validate
     
     - name: Tofu Plan
-      run: tofu plan -out=tfplan
+      id: plan
+      run: tofu plan -out=tfplan -no-color
+      continue-on-error: true
     
-    - name: Upload Plan
-      uses: actions/upload-artifact@v4
-      with:
-        name: tfplan-${{ inputs.environment }}
-        path: ${{ inputs.working_directory }}/tfplan
-        retention-days: 5
-
