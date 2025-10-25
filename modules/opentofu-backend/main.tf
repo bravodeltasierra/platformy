@@ -40,6 +40,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "opentofu_lifestyle_config" {
     id     = "delete-old-versions"
     status = "Enabled"
     
+    filter {}
+    
     noncurrent_version_expiration {
       noncurrent_days = 90
     }
