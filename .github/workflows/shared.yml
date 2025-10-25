@@ -59,3 +59,9 @@ jobs:
       run: tofu plan -out=tfplan -no-color
       continue-on-error: true
     
+    - name: Tofu Apply
+      id: apply
+      if: var.auto_apply == 'true'
+      run: tofu apply -auto-approve tfplan
+      continue-on-error: true
+     
