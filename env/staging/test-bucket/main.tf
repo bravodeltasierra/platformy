@@ -1,6 +1,6 @@
 terraform {
   required_version = ">= 1.6.0"
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -16,5 +16,5 @@ provider "aws" {
 module "test_bucket" {
   source = "../../modules/test-bucket"
 
-  bucket_name         = "staging-test-bucket"
+  bucket_name = "staging-test-bucket"
 }
