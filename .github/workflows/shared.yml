@@ -61,6 +61,6 @@ jobs:
 
     - name: Tofu Apply
       id: apply
-      if: inputs.auto_apply == true
+      if: ${{ inputs.auto_apply }}
       run: tofu apply -auto-approve tfplan
         
