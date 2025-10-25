@@ -7,13 +7,14 @@ on:
 permissions:
   contents: read
   pull-requests: write
+
 jobs:
   staging-main:
     uses: ./.github/workflows/shared.yml
     with:
       environment: staging
       working_directory: ./env/staging
-      auto_apply: ${{ github.event_name == 'push' }}
+      auto_apply: false
     secrets: inherit
   
   staging-test-bucket:
@@ -21,6 +22,6 @@ jobs:
     with:
       environment: staging
       working_directory: ./env/staging/test-bucket
-      auto_apply: ${{ github.event_name == 'push' }}
+      auto_apply: false
     secrets: inherit
 
