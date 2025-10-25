@@ -1,8 +1,23 @@
 name: Staging
 
 on:
+  push:
+    branches: [staging]
+    paths:
+      - 'env/staging/**'
+      - 'modules/**'
+      - '.github/workflows/staging.yml'
   pull_request:
     branches: [main]
+    paths:
+      - 'env/staging/**'
+      - 'modules/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
 
 jobs:
   deploy-staging:
