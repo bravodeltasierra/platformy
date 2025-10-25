@@ -21,7 +21,7 @@ provider "aws" {
   default_tags {
     tags = {
       Environment = "staging"
-      ManagedBy = "OpenTofu"
+      ManagedBy   = "OpenTofu"
     }
   }
 }
