@@ -16,8 +16,8 @@ on:
 
 permissions:
   contents: read
-  pull-requests: write  # Add this for PR comments
-  issues: write         # Add this for issue comments
+  pull-requests: write
+  issues: write
 
 jobs:
   terraform:
@@ -59,33 +59,3 @@ jobs:
       run: tofu plan -out=tfplan -no-color
       continue-on-error: true
     
-    - name: Comment Plan on PR
-      if: github.event_name == 'pull_request'
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const output = `#### Terraform Plan for \`${{ inputs.environment }}\` 📖
-          
-          <details><summary>Show Plan</summary>
-          
-          \`\`\`terraform
-          ${{ steps.plan.outputs.stdout }}
-          \`\`\`
-          
-          </details>
-          
-          *Pusher: @${{ github.actor }}, Working Directory: \`${{ inputs.working_directory }}\`*`;
-          
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: output
-          })
-    
-    - name: Upload Plan
-      uses: actions/upload-artifact@v4
-      with:
-        name: tfplan-${{ inputs.environment }}
-        path: ${{ inputs.working_directory }}/tfplan
-        retention-days: 5
