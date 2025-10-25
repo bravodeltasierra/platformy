@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+
 permissions:
   contents: read
   pull-requests: write
@@ -23,3 +23,4 @@ jobs:
       working_directory: ./env/staging/test-bucket
       auto_apply: ${{ github.event_name == 'push' }}
     secrets: inherit
+
