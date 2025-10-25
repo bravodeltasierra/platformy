@@ -1,17 +1,10 @@
-name: Staging
+name: Staging Deploys
 
 on:
   push:
-    branches: [staging]
-    paths:
-      - 'env/staging/**'
-      - 'modules/**'
-      - '.github/workflows/staging.yml'
+    branches: [main]
   pull_request:
     branches: [main]
-    paths:
-      - 'env/staging/**'
-      - 'modules/**'
   workflow_dispatch:
 
 permissions:
@@ -20,20 +13,19 @@ permissions:
   issues: write
 
 jobs:
-  plan-staging:
+  staging-main:
     uses: ./.github/workflows/shared.yml
     with:
       environment: staging
       working_directory: ./env/staging
-      auto_apply: ${{ github.ref == 'refs/heads/staging' && github.event_name == 'push' }}
+      auto_apply: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     secrets: inherit
 
-  apply-staging:
-    needs: plan-staging
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+  staging-test-bucket:
     uses: ./.github/workflows/shared.yml
     with:
       environment: staging
-      working_directory: ./env/staging
-      auto_apply: true
+      working_directory: ./env/staging/test-bucket
+      auto_apply: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     secrets: inherit
+
