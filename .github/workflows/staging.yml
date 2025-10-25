@@ -27,3 +27,13 @@ jobs:
       working_directory: ./env/staging
       auto_apply: ${{ github.ref == 'refs/heads/staging' && github.event_name == 'push' }}
     secrets: inherit
+
+  apply-staging:
+    needs: plan-staging
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/shared.yml
+    with:
+      environment: staging
+      working_directory: ./env/staging
+      auto_apply: true
+    secrets: inherit
