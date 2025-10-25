@@ -20,7 +20,7 @@ permissions:
   issues: write
 
 jobs:
-  deploy-staging:
+  plan-staging:
     uses: ./.github/workflows/shared.yml
     with:
       environment: staging
