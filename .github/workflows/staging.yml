@@ -1,0 +1,24 @@
+name: Dev Environment
+
+on:
+  push:
+    branches: [dev, develop]
+    paths:
+      - 'environments/staging/**'
+      - 'modules/**'
+      - '.github/workflows/staging.yml'
+  pull_request:
+    branches: [dev, develop]
+    paths:
+      - 'environments/staging/**'
+      - 'modules/**'
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    uses: ./.github/workflows/shared.yml
+    with:
+      environment: staging
+      working_directory: ./env/staging
+      auto_apply: ${{ github.ref == 'refs/heads/staging' && github.event_name == 'push' }}
+    secrets: inherit
