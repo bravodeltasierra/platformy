@@ -29,5 +29,5 @@ provider "aws" {
 module "test_bucket" {
   source = "../../../modules/test-bucket"
 
-  bucket_name = "new-bucket"
+  bucket_name = "new-bucket-1231232143dsfs"
 }
