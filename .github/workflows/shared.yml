@@ -1,4 +1,4 @@
-name: Reusable Terraform Workflow
+name: Main Plan/Apply Resuable Flow
 
 on:
   workflow_call:
