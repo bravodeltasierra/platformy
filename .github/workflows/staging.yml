@@ -1,18 +1,8 @@
 name: Staging
 
 on:
-  push:
-    branches: [staging]
-    paths:
-      - 'environments/staging/**'
-      - 'modules/**'
-      - '.github/workflows/staging.yml'
   pull_request:
-    branches: [main]  # Plans on PRs to main (testing before prod)
-    paths:
-      - 'environments/staging/**'
-      - 'modules/**'
-  workflow_dispatch:
+    branches: [main]
 
 jobs:
   deploy-staging:
